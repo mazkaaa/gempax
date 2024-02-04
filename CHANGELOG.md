@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/mazkaaa/gempax/compare/v1.1.0...v1.1.1) (2024-02-04)
+
+
+### Bug Fixes
+
+* algorithm for getting the value ([9ecb065](https://github.com/mazkaaa/gempax/commit/9ecb0657d7decbf951393d86cfe1092d1c04222f))
+
 ## [1.1.0](https://github.com/mazkaaa/gempax/compare/v1.0.0...v1.1.0) (2024-02-04)
 
 
