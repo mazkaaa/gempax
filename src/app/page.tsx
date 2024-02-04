@@ -232,7 +232,7 @@ export default function Home() {
             setOption(e.target.value as "realtime" | "history");
           }}
           value={option}
-          className="select select-sm select-bordered w-full"
+          className="select select-bordered select-sm w-full"
         >
           <option value={"realtime"}>Realtime</option>
           <option value={"history"}>History</option>
