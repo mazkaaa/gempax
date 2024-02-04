@@ -226,194 +226,202 @@ export default function Home() {
 
   return (
     <main className="relative h-full w-full">
-      <div className="absolute left-4 top-4 z-50">
-        <select
-          onChange={(e) => {
-            setOption(e.target.value as "realtime" | "history");
-          }}
-          value={option}
-          className="select select-bordered select-sm w-full"
-        >
-          <option value={"realtime"}>Realtime</option>
-          <option value={"history"}>History</option>
-        </select>
+      <div className="flex h-full w-full flex-col items-center justify-center px-6 md:hidden">
+        <h1 className="text-center text-2xl">
+          Mobile view is not supported yet, please use a desktop browser
+        </h1>
       </div>
-      <div className="absolute right-4 top-4 z-50 text-gray-700">
-        <div className="h-auto w-96 bg-white">
-          <section id="about" className="space-y-2 p-4 ">
-            <h1 className="text-lg font-semibold">
-              {option === "realtime"
-                ? "Realtime Earthquake Data"
-                : "Earthquake History"}
-            </h1>
-            <div className="space-y-1">
-              <p className="text-sm">
-                {option === "realtime"
-                  ? "Latest 15 earthquakes data in realtime"
-                  : "Information of destructive earthquakes from 2150 B.C. to the present."}
-              </p>
-              <p className="text-sm">
-                Data source:{" "}
-                {option === "realtime" ? (
-                  <a
-                    className="text-cyan-700"
-                    href="https://data.bmkg.go.id/gempabumi/"
-                  >
-                    BMKG (Badan Meteorologi, Klimatologi, dan Geofisika)
-                  </a>
-                ) : (
-                  <a
-                    className="text-cyan-700"
-                    href="https://public.opendatasoft.com/explore/dataset/significant-earthquake-database/"
-                  >
-                    National Centers for Environmental Information
-                  </a>
-                )}
-              </p>
-            </div>
-          </section>
 
-          <div className="w-full border-b"></div>
-
-          <section id="filter" className="space-y-4 p-4 ">
-            <div className="space-y-2">
-              {/* <h1 className="text-lg font-semibold">Filter</h1> */}
-              <div className="space-y-1">
-                <p className="text-sm">Cell size</p>
-                <input
-                  type="range"
-                  min={5}
-                  max="25"
-                  value={cellSize}
-                  onChange={(e) => setCellSize(parseInt(e.target.value))}
-                  className="range range-xs"
-                />
-              </div>
-            </div>
-          </section>
-
-          <div className="w-full border-b"></div>
-
-          <section id="data" className="space-y-4 p-4 uppercase">
-            {option === "realtime" ? (
-              <>
-                {data.length > 0 ? (
-                  <div className="space-y-4">
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-light uppercase">
-                        max magnitude location
-                      </h4>
-                      <h3 className="text-3xl font-semibold">
-                        {getMaxMagnitudeLocationName()}
-                      </h3>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-light uppercase">
-                        max magnitude depth
-                      </h4>
-                      <h3 className="text-3xl font-semibold">
-                        {getMaxDepth() + " KM"}
-                      </h3>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-light uppercase">
-                        max magnitude
-                      </h4>
-                      <h3 className="text-3xl font-semibold">
-                        {getMaxMagnitude() + " SR"}
-                      </h3>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-light uppercase">
-                        Average Depth
-                      </h4>
-                      <h3 className="text-3xl font-semibold">
-                        {getAvgDepth() + " km"}
-                      </h3>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-light uppercase">
-                        average magnitude
-                      </h4>
-                      <h3 className="text-3xl font-semibold">
-                        {getAvgMagnitude().toFixed() + " SR"}
-                      </h3>
-                    </div>
-                  </div>
-                ) : (
-                  "Loading..."
-                )}
-              </>
-            ) : (
-              <>
-                {data.length > 0 ? (
-                  <div className="space-y-4">
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-light uppercase">
-                        total houses destroyed
-                      </h4>
-                      <h3 className="text-3xl font-semibold">
-                        {formatNumber(getTotalHousesDestroyed())}
-                      </h3>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-light uppercase">
-                        total houses damaged
-                      </h4>
-                      <h3 className="text-3xl font-semibold">
-                        {formatNumber(getTotalHousesDamaged())}
-                      </h3>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-light uppercase">
-                        total deaths
-                      </h4>
-                      <h3 className="text-3xl font-semibold">
-                        {formatNumber(getTotalDeaths())}
-                      </h3>
-                    </div>
-
-                    <div className="space-y-1">
-                      <h4 className="text-xs font-light uppercase">
-                        total injuries
-                      </h4>
-                      <h3 className="text-3xl font-semibold">
-                        {formatNumber(getTotalInjuries())}
-                      </h3>
-                    </div>
-                  </div>
-                ) : (
-                  "Loading..."
-                )}
-              </>
-            )}
-          </section>
+      <div className="hidden h-full w-full md:block">
+        <div className="absolute left-4 top-4 z-50">
+          <select
+            onChange={(e) => {
+              setOption(e.target.value as "realtime" | "history");
+            }}
+            value={option}
+            className="select select-bordered select-sm w-full"
+          >
+            <option value={"realtime"}>Realtime</option>
+            <option value={"history"}>History</option>
+          </select>
         </div>
+        <div className="absolute right-4 top-4 z-50 text-gray-700">
+          <div className="h-auto w-96 bg-white">
+            <section id="about" className="space-y-2 p-4 ">
+              <h1 className="text-lg font-semibold">
+                {option === "realtime"
+                  ? "Realtime Earthquake Data"
+                  : "Earthquake History"}
+              </h1>
+              <div className="space-y-1">
+                <p className="text-sm">
+                  {option === "realtime"
+                    ? "Latest 15 earthquakes data in realtime"
+                    : "Information of destructive earthquakes from 2150 B.C. to the present."}
+                </p>
+                <p className="text-sm">
+                  Data source:{" "}
+                  {option === "realtime" ? (
+                    <a
+                      className="text-cyan-700"
+                      href="https://data.bmkg.go.id/gempabumi/"
+                    >
+                      BMKG (Badan Meteorologi, Klimatologi, dan Geofisika)
+                    </a>
+                  ) : (
+                    <a
+                      className="text-cyan-700"
+                      href="https://public.opendatasoft.com/explore/dataset/significant-earthquake-database/"
+                    >
+                      National Centers for Environmental Information
+                    </a>
+                  )}
+                </p>
+              </div>
+            </section>
+
+            <div className="w-full border-b"></div>
+
+            <section id="filter" className="space-y-4 p-4 ">
+              <div className="space-y-2">
+                {/* <h1 className="text-lg font-semibold">Filter</h1> */}
+                <div className="space-y-1">
+                  <p className="text-sm">Cell size</p>
+                  <input
+                    type="range"
+                    min={5}
+                    max="25"
+                    value={cellSize}
+                    onChange={(e) => setCellSize(parseInt(e.target.value))}
+                    className="range range-xs"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <div className="w-full border-b"></div>
+
+            <section id="data" className="space-y-4 p-4 uppercase">
+              {option === "realtime" ? (
+                <>
+                  {data.length > 0 ? (
+                    <div className="space-y-4">
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-light uppercase">
+                          max magnitude location
+                        </h4>
+                        <h3 className="text-3xl font-semibold">
+                          {getMaxMagnitudeLocationName()}
+                        </h3>
+                      </div>
+
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-light uppercase">
+                          max magnitude depth
+                        </h4>
+                        <h3 className="text-3xl font-semibold">
+                          {getMaxDepth() + " KM"}
+                        </h3>
+                      </div>
+
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-light uppercase">
+                          max magnitude
+                        </h4>
+                        <h3 className="text-3xl font-semibold">
+                          {getMaxMagnitude() + " SR"}
+                        </h3>
+                      </div>
+
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-light uppercase">
+                          Average Depth
+                        </h4>
+                        <h3 className="text-3xl font-semibold">
+                          {getAvgDepth() + " km"}
+                        </h3>
+                      </div>
+
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-light uppercase">
+                          average magnitude
+                        </h4>
+                        <h3 className="text-3xl font-semibold">
+                          {getAvgMagnitude().toFixed() + " SR"}
+                        </h3>
+                      </div>
+                    </div>
+                  ) : (
+                    "Loading..."
+                  )}
+                </>
+              ) : (
+                <>
+                  {data.length > 0 ? (
+                    <div className="space-y-4">
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-light uppercase">
+                          total houses destroyed
+                        </h4>
+                        <h3 className="text-3xl font-semibold">
+                          {formatNumber(getTotalHousesDestroyed())}
+                        </h3>
+                      </div>
+
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-light uppercase">
+                          total houses damaged
+                        </h4>
+                        <h3 className="text-3xl font-semibold">
+                          {formatNumber(getTotalHousesDamaged())}
+                        </h3>
+                      </div>
+
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-light uppercase">
+                          total deaths
+                        </h4>
+                        <h3 className="text-3xl font-semibold">
+                          {formatNumber(getTotalDeaths())}
+                        </h3>
+                      </div>
+
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-light uppercase">
+                          total injuries
+                        </h4>
+                        <h3 className="text-3xl font-semibold">
+                          {formatNumber(getTotalInjuries())}
+                        </h3>
+                      </div>
+                    </div>
+                  ) : (
+                    "Loading..."
+                  )}
+                </>
+              )}
+            </section>
+          </div>
+        </div>
+        <DeckGL
+          layers={layers}
+          initialViewState={{
+            longitude: data[0] ? data[0].coords.long : 0,
+            latitude: data[0] ? data[0].coords.lat : 0,
+            zoom: 3,
+            maxZoom: 16,
+            pitch: 0,
+            bearing: 0,
+          }}
+          controller={true}
+        >
+          <Map
+            reuseMaps={true}
+            mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
+            mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
+          />
+        </DeckGL>
       </div>
-      <DeckGL
-        layers={layers}
-        initialViewState={{
-          longitude: data[0] ? data[0].coords.long : 0,
-          latitude: data[0] ? data[0].coords.lat : 0,
-          zoom: 3,
-          maxZoom: 16,
-          pitch: 0,
-          bearing: 0,
-        }}
-        controller={true}
-      >
-        <Map
-          reuseMaps={true}
-          mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-          mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
-        />
-      </DeckGL>
     </main>
   );
 }
