@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/mazkaaa/gempax/compare/v1.1.1...v1.1.2) (2024-02-04)
+
+
+### Performance Improvements
+
+* changed the mapbox style ([8a69751](https://github.com/mazkaaa/gempax/commit/8a697516e71a9ae1db054cf19e451d002387a929))
+
 ## [1.1.1](https://github.com/mazkaaa/gempax/compare/v1.1.0...v1.1.1) (2024-02-04)
 
 
