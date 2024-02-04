@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/mazkaaa/gempax/compare/v1.0.0...v1.1.0) (2024-02-04)
+
+
+### Features
+
+* added countries list filter ([5c9aa22](https://github.com/mazkaaa/gempax/commit/5c9aa221ae33c4a5d70982f4c14199239e24ff24))
+* added theme ([7f3176e](https://github.com/mazkaaa/gempax/commit/7f3176ec94bfebd5af7cd976c9f39f713ba8f98b))
+
 ## 1.0.0 (2024-02-04)
 
 
