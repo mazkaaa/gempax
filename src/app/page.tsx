@@ -8,11 +8,13 @@ import { useEffect, useState } from "react";
 import { EarthquakeData } from "@/components/interfaces";
 import CardInfo from "@/components/reusables/card-info";
 import { api } from "@/components/constants";
+import countries from "@/components/countries.json";
 
 export default function Home() {
   const [data, setData] = useState<EarthquakeData[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  const [option, setOption] = useState<"realtime" | "history">("realtime");
+  const [country, setCountry] = useState("");
 
   const [cellSize, setCellSize] = useState<number>(25);
 
@@ -31,7 +33,7 @@ export default function Home() {
       data: data,
       opacity: 0.8,
       getPosition: (d) => [d.longitude, d.latitude],
-      getWeight: (d) => d.eqMagnitude || 0,
+      getWeight: (d) => d.year,
       cellSizePixels: cellSize,
       colorRange: colorRange as any,
       aggregation: "SUM",
@@ -39,9 +41,10 @@ export default function Home() {
   ];
 
   const fetchData = async () => {
+    setLoading(true);
     const params = new URLSearchParams();
     let page = 1;
-    params.append("country", "indonesia");
+    params.append("country", country);
     const res = await fetch(
       api.url + api.earthquakes.url + "?" + params.toString(),
     );
@@ -67,33 +70,14 @@ export default function Home() {
       page++;
     }
     setData(dataResult);
+    setLoading(false);
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  const getAvgDepth = () => {
-    const array = data.map((d) => d.eqDepth);
-    const sum = array.reduce((a, b) => (a || 0) + (b || 0));
-    return sum || 0 / array.length;
-  };
-  const getAvgMagnitude = () => {
-    const array = data.map((d) => d.eqMagnitude);
-    const sum = array.reduce((a, b) => (a || 0) + (b || 0));
-    return sum || 0 / array.length;
-  };
-  const getMaxMagnitudeLocationName = () => {
-    const max = Math.max(...data.map((d) => d.eqMagnitude || 0));
-    const maxData = data.find((d) => d.eqMagnitude === max);
-    return maxData?.locationName.split(" ")[1] || "N/A";
-  };
-  const getMaxMagnitude = () => {
-    return Math.max(...data.map((d) => d.eqMagnitude || 0));
-  };
-  const getMaxDepth = () => {
-    return Math.max(...data.map((d) => d.eqDepth || 0));
-  };
+    if (country !== "") {
+      fetchData();
+    }
+  }, [country]);
 
   const getTotalHousesDestroyed = () => {
     return data.reduce((a, b) => (a || 0) + (b.housesDestroyed || 0), 0);
@@ -114,6 +98,42 @@ export default function Home() {
         : current,
     );
     return mostDestructiveYear.year;
+  };
+  const getLessDestructiveYear = () => {
+    const lessDestructiveYear = data.reduce((prev, current) =>
+      (prev.housesDestroyedTotal || 0) < (current.housesDestroyedTotal || 0)
+        ? prev
+        : current,
+    );
+    return lessDestructiveYear.year;
+  };
+  const getMostFrequentYear = () => {
+    const years = data.map((d) => d.year);
+    const counts: {
+      [key: number]: number;
+    } = {};
+
+    years.forEach((x) => {
+      counts[x] = (counts[x] || 0) + 1;
+    });
+
+    const max = Math.max(...Object.values(counts));
+    const year = Object.keys(counts).find((key) => counts[key as any] === max);
+    return year;
+  };
+  const getLessFrequentYear = () => {
+    const years = data.map((d) => d.year);
+    const counts: {
+      [key: number]: number;
+    } = {};
+
+    years.forEach((x) => {
+      counts[x] = (counts[x] || 0) + 1;
+    });
+
+    const min = Math.min(...Object.values(counts));
+    const year = Object.keys(counts).find((key) => counts[key as any] === min);
+    return year;
   };
 
   const formatNumber = (n: number) => {
@@ -167,57 +187,99 @@ export default function Home() {
                     className="range range-xs"
                   />
                 </div>
+                <div className="space-y-1">
+                  <p className="text-sm">Country</p>
+                  <select
+                    className="select select-bordered select-sm w-full"
+                    onChange={(e) => setCountry(e.target.value)}
+                  >
+                    <option value={""}>Select country to view data</option>
+                    {countries.map((country, index) => (
+                      <option key={index} value={country.id}>
+                        {country.id}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </section>
 
-            <div className="w-full border-b"></div>
+            {country === "" ? null : (
+              <>
+                <div className="w-full border-b"></div>
+                <section id="data" className="space-y-4 p-4 uppercase">
+                  {!loading && data.length > 0 ? (
+                    <div className="grid grid-cols-6 gap-4">
+                      <div className="col-span-3">
+                        <CardInfo
+                          title="total houses destroyed"
+                          value={
+                            formatNumber(getTotalHousesDestroyed())?.toString()!
+                          }
+                        />
+                      </div>
 
-            <section id="data" className="space-y-4 p-4 uppercase">
-              {data.length > 0 ? (
-                <div className="grid grid-cols-6 gap-4">
-                  <div className="col-span-3">
-                    <CardInfo
-                      title="total houses destroyed"
-                      value={
-                        formatNumber(getTotalHousesDestroyed())?.toString()!
-                      }
-                    />
-                  </div>
+                      <div className="col-span-3 space-y-1">
+                        <CardInfo
+                          title="total houses damaged"
+                          value={
+                            formatNumber(getTotalHousesDamaged())?.toString()!
+                          }
+                        />
+                      </div>
 
-                  <div className="col-span-3 space-y-1">
-                    <CardInfo
-                      title="total houses damaged"
-                      value={formatNumber(getTotalHousesDamaged())?.toString()!}
-                    />
-                  </div>
+                      <div className="col-span-3 space-y-1">
+                        <CardInfo
+                          title="total deaths"
+                          value={formatNumber(getTotalDeaths())?.toString()!}
+                        />
+                      </div>
 
-                  <div className="col-span-3 space-y-1">
-                    <CardInfo
-                      title="total deaths"
-                      value={formatNumber(getTotalDeaths())?.toString()!}
-                    />
-                  </div>
+                      <div className="col-span-3 space-y-1">
+                        <CardInfo
+                          title="total injuries"
+                          value={formatNumber(getTotalInjuries())?.toString()!}
+                        />
+                      </div>
 
-                  <div className="col-span-3 space-y-1">
-                    <CardInfo
-                      title="total injuries"
-                      value={formatNumber(getTotalInjuries())?.toString()!}
-                    />
-                  </div>
+                      <div className="col-span-3 space-y-1">
+                        <CardInfo
+                          title="most destructive year"
+                          value={new Date(getMostDestructiveYear())
+                            .getFullYear()
+                            .toString()}
+                        />
+                      </div>
 
-                  <div className="col-span-3 space-y-1">
-                    <CardInfo
-                      title="most destructive year"
-                      value={new Date(getMostDestructiveYear())
-                        .getFullYear()
-                        .toString()}
-                    />
-                  </div>
-                </div>
-              ) : (
-                "Loading..."
-              )}
-            </section>
+                      <div className="col-span-3 space-y-1">
+                        <CardInfo
+                          title="less destructive year"
+                          value={new Date(getLessDestructiveYear())
+                            .getFullYear()
+                            .toString()}
+                        />
+                      </div>
+
+                      <div className="col-span-3 space-y-1">
+                        <CardInfo
+                          title="most frequent year"
+                          value={getMostFrequentYear()!}
+                        />
+                      </div>
+
+                      <div className="col-span-3 space-y-1">
+                        <CardInfo
+                          title="less frequent year"
+                          value={getLessFrequentYear()!}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    "Loading..."
+                  )}
+                </section>
+              </>
+            )}
           </div>
         </div>
         <DeckGL

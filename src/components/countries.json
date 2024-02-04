@@ -1,0 +1,630 @@
+[
+    {
+      "id": "AFGHANISTAN",
+      "description": "AFGHANISTAN"
+    },
+    {
+      "id": "ALBANIA",
+      "description": "ALBANIA"
+    },
+    {
+      "id": "ALGERIA",
+      "description": "ALGERIA"
+    },
+    {
+      "id": "ANTARCTICA",
+      "description": "ANTARCTICA"
+    },
+    {
+      "id": "ANTIGUA AND BARBUDA",
+      "description": "ANTIGUA AND BARBUDA"
+    },
+    {
+      "id": "ARGENTINA",
+      "description": "ARGENTINA"
+    },
+    {
+      "id": "ARMENIA",
+      "description": "ARMENIA"
+    },
+    {
+      "id": "ATLANTIC OCEAN",
+      "description": "ATLANTIC OCEAN"
+    },
+    {
+      "id": "AUSTRALIA",
+      "description": "AUSTRALIA"
+    },
+    {
+      "id": "AUSTRIA",
+      "description": "AUSTRIA"
+    },
+    {
+      "id": "AZERBAIJAN",
+      "description": "AZERBAIJAN"
+    },
+    {
+      "id": "AZORES (PORTUGAL)",
+      "description": "AZORES (PORTUGAL)"
+    },
+    {
+      "id": "BANGLADESH",
+      "description": "BANGLADESH"
+    },
+    {
+      "id": "BARBADOS",
+      "description": "BARBADOS"
+    },
+    {
+      "id": "BELGIUM",
+      "description": "BELGIUM"
+    },
+    {
+      "id": "BERING SEA",
+      "description": "BERING SEA"
+    },
+    {
+      "id": "BHUTAN",
+      "description": "BHUTAN"
+    },
+    {
+      "id": "BOLIVIA",
+      "description": "BOLIVIA"
+    },
+    {
+      "id": "BOSNIA-HERZEGOVINA",
+      "description": "BOSNIA-HERZEGOVINA"
+    },
+    {
+      "id": "BRAZIL",
+      "description": "BRAZIL"
+    },
+    {
+      "id": "BRITISH VIRGIN ISLANDS",
+      "description": "BRITISH VIRGIN ISLANDS"
+    },
+    {
+      "id": "BULGARIA",
+      "description": "BULGARIA"
+    },
+    {
+      "id": "BURUNDI",
+      "description": "BURUNDI"
+    },
+    {
+      "id": "CAMEROON",
+      "description": "CAMEROON"
+    },
+    {
+      "id": "CANADA",
+      "description": "CANADA"
+    },
+    {
+      "id": "CANARY ISLANDS",
+      "description": "CANARY ISLANDS"
+    },
+    {
+      "id": "CENTRAL AFRICAN REPUBLIC",
+      "description": "CENTRAL AFRICAN REPUBLIC"
+    },
+    {
+      "id": "CHILE",
+      "description": "CHILE"
+    },
+    {
+      "id": "CHINA",
+      "description": "CHINA"
+    },
+    {
+      "id": "COLOMBIA",
+      "description": "COLOMBIA"
+    },
+    {
+      "id": "COMOROS",
+      "description": "COMOROS"
+    },
+    {
+      "id": "CONGO",
+      "description": "CONGO"
+    },
+    {
+      "id": "COSTA RICA",
+      "description": "COSTA RICA"
+    },
+    {
+      "id": "COTE D'IVOIRE",
+      "description": "COTE D'IVOIRE"
+    },
+    {
+      "id": "CROATIA",
+      "description": "CROATIA"
+    },
+    {
+      "id": "CUBA",
+      "description": "CUBA"
+    },
+    {
+      "id": "CYPRUS",
+      "description": "CYPRUS"
+    },
+    {
+      "id": "CZECH REPUBLIC",
+      "description": "CZECH REPUBLIC"
+    },
+    {
+      "id": "DJIBOUTI",
+      "description": "DJIBOUTI"
+    },
+    {
+      "id": "DOMINICAN REPUBLIC",
+      "description": "DOMINICAN REPUBLIC"
+    },
+    {
+      "id": "ECUADOR",
+      "description": "ECUADOR"
+    },
+    {
+      "id": "EGYPT",
+      "description": "EGYPT"
+    },
+    {
+      "id": "EL SALVADOR",
+      "description": "EL SALVADOR"
+    },
+    {
+      "id": "ERITREA",
+      "description": "ERITREA"
+    },
+    {
+      "id": "ETHIOPIA",
+      "description": "ETHIOPIA"
+    },
+    {
+      "id": "FIJI",
+      "description": "FIJI"
+    },
+    {
+      "id": "FRANCE",
+      "description": "FRANCE"
+    },
+    {
+      "id": "FRENCH GUIANA",
+      "description": "FRENCH GUIANA"
+    },
+    {
+      "id": "FRENCH POLYNESIA",
+      "description": "FRENCH POLYNESIA"
+    },
+    {
+      "id": "GABON",
+      "description": "GABON"
+    },
+    {
+      "id": "GEORGIA",
+      "description": "GEORGIA"
+    },
+    {
+      "id": "GERMANY",
+      "description": "GERMANY"
+    },
+    {
+      "id": "GHANA",
+      "description": "GHANA"
+    },
+    {
+      "id": "GREECE",
+      "description": "GREECE"
+    },
+    {
+      "id": "GRENADA",
+      "description": "GRENADA"
+    },
+    {
+      "id": "GUADELOUPE",
+      "description": "GUADELOUPE"
+    },
+    {
+      "id": "GUATEMALA",
+      "description": "GUATEMALA"
+    },
+    {
+      "id": "GUINEA",
+      "description": "GUINEA"
+    },
+    {
+      "id": "HAITI",
+      "description": "HAITI"
+    },
+    {
+      "id": "HONDURAS",
+      "description": "HONDURAS"
+    },
+    {
+      "id": "HUNGARY",
+      "description": "HUNGARY"
+    },
+    {
+      "id": "ICELAND",
+      "description": "ICELAND"
+    },
+    {
+      "id": "INDIA",
+      "description": "INDIA"
+    },
+    {
+      "id": "INDIAN OCEAN",
+      "description": "INDIAN OCEAN"
+    },
+    {
+      "id": "INDONESIA",
+      "description": "INDONESIA"
+    },
+    {
+      "id": "IRAN",
+      "description": "IRAN"
+    },
+    {
+      "id": "IRAQ",
+      "description": "IRAQ"
+    },
+    {
+      "id": "IRELAND",
+      "description": "IRELAND"
+    },
+    {
+      "id": "ISRAEL",
+      "description": "ISRAEL"
+    },
+    {
+      "id": "ITALY",
+      "description": "ITALY"
+    },
+    {
+      "id": "JAMAICA",
+      "description": "JAMAICA"
+    },
+    {
+      "id": "JAPAN",
+      "description": "JAPAN"
+    },
+    {
+      "id": "JORDAN",
+      "description": "JORDAN"
+    },
+    {
+      "id": "KAZAKHSTAN",
+      "description": "KAZAKHSTAN"
+    },
+    {
+      "id": "KENYA",
+      "description": "KENYA"
+    },
+    {
+      "id": "KERMADEC ISLANDS (NEW ZEALAND)",
+      "description": "KERMADEC ISLANDS (NEW ZEALAND)"
+    },
+    {
+      "id": "KIRIBATI",
+      "description": "KIRIBATI"
+    },
+    {
+      "id": "KYRGYZSTAN",
+      "description": "KYRGYZSTAN"
+    },
+    {
+      "id": "LAOS",
+      "description": "LAOS"
+    },
+    {
+      "id": "LEBANON",
+      "description": "LEBANON"
+    },
+    {
+      "id": "LIBYA",
+      "description": "LIBYA"
+    },
+    {
+      "id": "MACEDONIA",
+      "description": "MACEDONIA"
+    },
+    {
+      "id": "MADAGASCAR",
+      "description": "MADAGASCAR"
+    },
+    {
+      "id": "MALAWI",
+      "description": "MALAWI"
+    },
+    {
+      "id": "MALAYSIA",
+      "description": "MALAYSIA"
+    },
+    {
+      "id": "MARTINIQUE",
+      "description": "MARTINIQUE"
+    },
+    {
+      "id": "MEXICO",
+      "description": "MEXICO"
+    },
+    {
+      "id": "MICRONESIA, FED. STATES OF",
+      "description": "MICRONESIA, FED. STATES OF"
+    },
+    {
+      "id": "MONGOLIA",
+      "description": "MONGOLIA"
+    },
+    {
+      "id": "MONTENEGRO",
+      "description": "MONTENEGRO"
+    },
+    {
+      "id": "MONTSERRAT",
+      "description": "MONTSERRAT"
+    },
+    {
+      "id": "MOROCCO",
+      "description": "MOROCCO"
+    },
+    {
+      "id": "MOZAMBIQUE",
+      "description": "MOZAMBIQUE"
+    },
+    {
+      "id": "MYANMAR (BURMA)",
+      "description": "MYANMAR (BURMA)"
+    },
+    {
+      "id": "NEPAL",
+      "description": "NEPAL"
+    },
+    {
+      "id": "NETHERLANDS",
+      "description": "NETHERLANDS"
+    },
+    {
+      "id": "NEW CALEDONIA",
+      "description": "NEW CALEDONIA"
+    },
+    {
+      "id": "NEW ZEALAND",
+      "description": "NEW ZEALAND"
+    },
+    {
+      "id": "NICARAGUA",
+      "description": "NICARAGUA"
+    },
+    {
+      "id": "NORTH KOREA",
+      "description": "NORTH KOREA"
+    },
+    {
+      "id": "NORWAY",
+      "description": "NORWAY"
+    },
+    {
+      "id": "PACIFIC OCEAN",
+      "description": "PACIFIC OCEAN"
+    },
+    {
+      "id": "PAKISTAN",
+      "description": "PAKISTAN"
+    },
+    {
+      "id": "PALAU",
+      "description": "PALAU"
+    },
+    {
+      "id": "PANAMA",
+      "description": "PANAMA"
+    },
+    {
+      "id": "PAPUA NEW GUINEA",
+      "description": "PAPUA NEW GUINEA"
+    },
+    {
+      "id": "PERU",
+      "description": "PERU"
+    },
+    {
+      "id": "PHILIPPINES",
+      "description": "PHILIPPINES"
+    },
+    {
+      "id": "POLAND",
+      "description": "POLAND"
+    },
+    {
+      "id": "PORTUGAL",
+      "description": "PORTUGAL"
+    },
+    {
+      "id": "ROMANIA",
+      "description": "ROMANIA"
+    },
+    {
+      "id": "RUSSIA",
+      "description": "RUSSIA"
+    },
+    {
+      "id": "RWANDA",
+      "description": "RWANDA"
+    },
+    {
+      "id": "SAINT LUCIA",
+      "description": "SAINT LUCIA"
+    },
+    {
+      "id": "SAINT VINCENT AND THE GRENADINES",
+      "description": "SAINT VINCENT AND THE GRENADINES"
+    },
+    {
+      "id": "SAMOA",
+      "description": "SAMOA"
+    },
+    {
+      "id": "SAUDI ARABIA",
+      "description": "SAUDI ARABIA"
+    },
+    {
+      "id": "SERBIA",
+      "description": "SERBIA"
+    },
+    {
+      "id": "SIERRA LEONE",
+      "description": "SIERRA LEONE"
+    },
+    {
+      "id": "SLOVAKIA",
+      "description": "SLOVAKIA"
+    },
+    {
+      "id": "SLOVENIA",
+      "description": "SLOVENIA"
+    },
+    {
+      "id": "SOLOMON ISLANDS",
+      "description": "SOLOMON ISLANDS"
+    },
+    {
+      "id": "SOLOMON SEA",
+      "description": "SOLOMON SEA"
+    },
+    {
+      "id": "SOUTH AFRICA",
+      "description": "SOUTH AFRICA"
+    },
+    {
+      "id": "SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS",
+      "description": "SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS"
+    },
+    {
+      "id": "SOUTH KOREA",
+      "description": "SOUTH KOREA"
+    },
+    {
+      "id": "SOUTH SUDAN",
+      "description": "SOUTH SUDAN"
+    },
+    {
+      "id": "SPAIN",
+      "description": "SPAIN"
+    },
+    {
+      "id": "SRI LANKA",
+      "description": "SRI LANKA"
+    },
+    {
+      "id": "SUDAN",
+      "description": "SUDAN"
+    },
+    {
+      "id": "SWITZERLAND",
+      "description": "SWITZERLAND"
+    },
+    {
+      "id": "SYRIA",
+      "description": "SYRIA"
+    },
+    {
+      "id": "TAIWAN",
+      "description": "TAIWAN"
+    },
+    {
+      "id": "TAJIKISTAN",
+      "description": "TAJIKISTAN"
+    },
+    {
+      "id": "TANZANIA",
+      "description": "TANZANIA"
+    },
+    {
+      "id": "TASMAN SEA",
+      "description": "TASMAN SEA"
+    },
+    {
+      "id": "THAILAND",
+      "description": "THAILAND"
+    },
+    {
+      "id": "TOGO",
+      "description": "TOGO"
+    },
+    {
+      "id": "TONGA",
+      "description": "TONGA"
+    },
+    {
+      "id": "TRINIDAD AND TOBAGO",
+      "description": "TRINIDAD AND TOBAGO"
+    },
+    {
+      "id": "TUNISIA",
+      "description": "TUNISIA"
+    },
+    {
+      "id": "TURKEY",
+      "description": "TURKEY"
+    },
+    {
+      "id": "TURKMENISTAN",
+      "description": "TURKMENISTAN"
+    },
+    {
+      "id": "UGANDA",
+      "description": "UGANDA"
+    },
+    {
+      "id": "UK",
+      "description": "UK"
+    },
+    {
+      "id": "UK TERRITORY",
+      "description": "UK TERRITORY"
+    },
+    {
+      "id": "UKRAINE",
+      "description": "UKRAINE"
+    },
+    {
+      "id": "URUGUAY",
+      "description": "URUGUAY"
+    },
+    {
+      "id": "USA",
+      "description": "USA"
+    },
+    {
+      "id": "USA TERRITORY",
+      "description": "USA TERRITORY"
+    },
+    {
+      "id": "UZBEKISTAN",
+      "description": "UZBEKISTAN"
+    },
+    {
+      "id": "VANUATU",
+      "description": "VANUATU"
+    },
+    {
+      "id": "VENEZUELA",
+      "description": "VENEZUELA"
+    },
+    {
+      "id": "VIETNAM",
+      "description": "VIETNAM"
+    },
+    {
+      "id": "WALLIS AND FUTUNA (FRENCH TERRITORY)",
+      "description": "WALLIS AND FUTUNA (FRENCH TERRITORY)"
+    },
+    {
+      "id": "YEMEN",
+      "description": "YEMEN"
+    },
+    {
+      "id": "ZAMBIA",
+      "description": "ZAMBIA"
+    }
+  ]
