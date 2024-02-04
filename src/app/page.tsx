@@ -92,20 +92,54 @@ export default function Home() {
     return data.reduce((a, b) => (a || 0) + (b.injuries || 0), 0);
   };
   const getMostDestructiveYear = () => {
-    const mostDestructiveYear = data.reduce((prev, current) =>
-      (prev.housesDestroyedTotal || 0) > (current.housesDestroyedTotal || 0)
-        ? prev
-        : current,
+    const yearTotals: { [key: number]: number } = data.reduce(
+      (
+        acc: {
+          [key: number]: number;
+        },
+        curr,
+      ) => {
+        const year = curr.year;
+        if (curr.housesDestroyedTotal !== undefined) {
+          acc[year] = (acc[year] || 0) + curr.housesDestroyedTotal;
+        }
+        return acc;
+      },
+      {},
     );
-    return mostDestructiveYear.year;
+
+    // Find the year with the highest destroyed house value
+    const highestValue = Math.max(...Object.values(yearTotals));
+    const highestYear = Object.entries(yearTotals).find(
+      ([year, value]) => value === highestValue,
+    )?.[0];
+
+    return highestYear; // Ensure number type
   };
   const getLessDestructiveYear = () => {
-    const lessDestructiveYear = data.reduce((prev, current) =>
-      (prev.housesDestroyedTotal || 0) < (current.housesDestroyedTotal || 0)
-        ? prev
-        : current,
+    const yearTotals: { [key: number]: number } = data.reduce(
+      (
+        acc: {
+          [key: number]: number;
+        },
+        curr,
+      ) => {
+        const year = curr.year;
+        if (curr.housesDestroyedTotal !== undefined) {
+          acc[year] = (acc[year] || 0) + curr.housesDestroyedTotal;
+        }
+        return acc;
+      },
+      {},
     );
-    return lessDestructiveYear.year;
+
+    // Find the year with the highest destroyed house value
+    const highestValue = Math.min(...Object.values(yearTotals));
+    const highestYear = Object.entries(yearTotals).find(
+      ([year, value]) => value === highestValue,
+    )?.[0];
+
+    return highestYear;
   };
   const getMostFrequentYear = () => {
     const years = data.map((d) => d.year);
@@ -245,18 +279,14 @@ export default function Home() {
                       <div className="col-span-3 space-y-1">
                         <CardInfo
                           title="most destructive year"
-                          value={new Date(getMostDestructiveYear())
-                            .getFullYear()
-                            .toString()}
+                          value={getMostDestructiveYear()!}
                         />
                       </div>
 
                       <div className="col-span-3 space-y-1">
                         <CardInfo
                           title="less destructive year"
-                          value={new Date(getLessDestructiveYear())
-                            .getFullYear()
-                            .toString()}
+                          value={getLessDestructiveYear()!}
                         />
                       </div>
 
