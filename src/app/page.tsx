@@ -327,7 +327,7 @@ export default function Home() {
           <Map
             reuseMaps={true}
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-            mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
+            mapStyle="mapbox://styles/mazkaaa/cls7ow75x01dn01r45gz55hrp"
           />
         </DeckGL>
       </div>
