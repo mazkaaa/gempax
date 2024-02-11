@@ -9,6 +9,16 @@ import { EarthquakeData } from "@/components/interfaces";
 import CardInfo from "@/components/reusables/card-info";
 import { api } from "@/components/constants";
 import countries from "@/components/countries.json";
+import {
+  getLessDestructiveYear,
+  getLessFrequentYear,
+  getMostDestructiveYear,
+  getMostFrequentYear,
+  getTotalDeaths,
+  getTotalHousesDamaged,
+  getTotalHousesDestroyed,
+  getTotalInjuries,
+} from "@/components/utils";
 
 export default function Home() {
   const [data, setData] = useState<EarthquakeData[]>([]);
@@ -79,97 +89,6 @@ export default function Home() {
     }
   }, [country]);
 
-  const getTotalHousesDestroyed = () => {
-    return data.reduce((a, b) => (a || 0) + (b.housesDestroyed || 0), 0);
-  };
-  const getTotalHousesDamaged = () => {
-    return data.reduce((a, b) => (a || 0) + (b.housesDamaged || 0), 0);
-  };
-  const getTotalDeaths = () => {
-    return data.reduce((a, b) => (a || 0) + (b.deaths || 0), 0);
-  };
-  const getTotalInjuries = () => {
-    return data.reduce((a, b) => (a || 0) + (b.injuries || 0), 0);
-  };
-  const getMostDestructiveYear = () => {
-    const yearTotals: { [key: number]: number } = data.reduce(
-      (
-        acc: {
-          [key: number]: number;
-        },
-        curr,
-      ) => {
-        const year = curr.year;
-        if (curr.housesDestroyedTotal !== undefined) {
-          acc[year] = (acc[year] || 0) + curr.housesDestroyedTotal;
-        }
-        return acc;
-      },
-      {},
-    );
-
-    // Find the year with the highest destroyed house value
-    const highestValue = Math.max(...Object.values(yearTotals));
-    const highestYear = Object.entries(yearTotals).find(
-      ([year, value]) => value === highestValue,
-    )?.[0];
-
-    return highestYear; // Ensure number type
-  };
-  const getLessDestructiveYear = () => {
-    const yearTotals: { [key: number]: number } = data.reduce(
-      (
-        acc: {
-          [key: number]: number;
-        },
-        curr,
-      ) => {
-        const year = curr.year;
-        if (curr.housesDestroyedTotal !== undefined) {
-          acc[year] = (acc[year] || 0) + curr.housesDestroyedTotal;
-        }
-        return acc;
-      },
-      {},
-    );
-
-    // Find the year with the highest destroyed house value
-    const highestValue = Math.min(...Object.values(yearTotals));
-    const highestYear = Object.entries(yearTotals).find(
-      ([year, value]) => value === highestValue,
-    )?.[0];
-
-    return highestYear;
-  };
-  const getMostFrequentYear = () => {
-    const years = data.map((d) => d.year);
-    const counts: {
-      [key: number]: number;
-    } = {};
-
-    years.forEach((x) => {
-      counts[x] = (counts[x] || 0) + 1;
-    });
-
-    const max = Math.max(...Object.values(counts));
-    const year = Object.keys(counts).find((key) => counts[key as any] === max);
-    return year;
-  };
-  const getLessFrequentYear = () => {
-    const years = data.map((d) => d.year);
-    const counts: {
-      [key: number]: number;
-    } = {};
-
-    years.forEach((x) => {
-      counts[x] = (counts[x] || 0) + 1;
-    });
-
-    const min = Math.min(...Object.values(counts));
-    const year = Object.keys(counts).find((key) => counts[key as any] === min);
-    return year;
-  };
-
   const formatNumber = (n: number) => {
     if (n < 1e3) return n;
     if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
@@ -184,9 +103,9 @@ export default function Home() {
       </div>
 
       <div className="hidden h-full w-full md:block">
-        <div className="absolute right-4 top-4 z-50 text-gray-700">
-          <div className="h-auto w-96 bg-white">
-            <section id="about" className="space-y-2 p-4 ">
+        <div className="absolute right-4 top-4 z-50 hidden text-gray-700">
+          <div className="h-auto w-full max-w-md divide-y divide-gray-300 bg-white">
+            <section id="about" className="space-y-2 p-6">
               <h1 className="text-lg font-semibold">Earthquake Events</h1>
               <div className="space-y-1">
                 <p className="text-sm">
@@ -205,13 +124,10 @@ export default function Home() {
               </div>
             </section>
 
-            <div className="w-full border-b"></div>
-
-            <section id="filter" className="space-y-4 p-4 ">
-              <div className="space-y-2">
-                {/* <h1 className="text-lg font-semibold">Filter</h1> */}
-                <div className="space-y-1">
-                  <p className="text-sm">Cell size</p>
+            <section id="filter" className="space-y-4 p-6">
+              <div className="flex flex-col space-y-4">
+                <div className="flex flex-col space-y-1">
+                  <label className="text-sm">Cell size</label>
                   <input
                     type="range"
                     min={5}
@@ -240,15 +156,17 @@ export default function Home() {
 
             {country === "" ? null : (
               <>
-                <div className="w-full border-b"></div>
-                <section id="data" className="space-y-4 p-4 uppercase">
+                {/* <div className="w-full border-b"></div> */}
+                <section id="data" className="space-y-4 p-6 uppercase">
                   {!loading && data.length > 0 ? (
                     <div className="grid grid-cols-6 gap-4">
                       <div className="col-span-3">
                         <CardInfo
                           title="total houses destroyed"
                           value={
-                            formatNumber(getTotalHousesDestroyed())?.toString()!
+                            formatNumber(
+                              getTotalHousesDestroyed(data),
+                            )?.toString()!
                           }
                         />
                       </div>
@@ -257,7 +175,9 @@ export default function Home() {
                         <CardInfo
                           title="total houses damaged"
                           value={
-                            formatNumber(getTotalHousesDamaged())?.toString()!
+                            formatNumber(
+                              getTotalHousesDamaged(data),
+                            )?.toString()!
                           }
                         />
                       </div>
@@ -265,42 +185,46 @@ export default function Home() {
                       <div className="col-span-3 space-y-1">
                         <CardInfo
                           title="total deaths"
-                          value={formatNumber(getTotalDeaths())?.toString()!}
+                          value={
+                            formatNumber(getTotalDeaths(data))?.toString()!
+                          }
                         />
                       </div>
 
                       <div className="col-span-3 space-y-1">
                         <CardInfo
                           title="total injuries"
-                          value={formatNumber(getTotalInjuries())?.toString()!}
+                          value={
+                            formatNumber(getTotalInjuries(data))?.toString()!
+                          }
                         />
                       </div>
 
                       <div className="col-span-3 space-y-1">
                         <CardInfo
                           title="most destructive year"
-                          value={getMostDestructiveYear()!}
+                          value={getMostDestructiveYear(data)}
                         />
                       </div>
 
                       <div className="col-span-3 space-y-1">
                         <CardInfo
                           title="less destructive year"
-                          value={getLessDestructiveYear()!}
+                          value={getLessDestructiveYear(data)}
                         />
                       </div>
 
                       <div className="col-span-3 space-y-1">
                         <CardInfo
                           title="most frequent year"
-                          value={getMostFrequentYear()!}
+                          value={getMostFrequentYear(data)}
                         />
                       </div>
 
                       <div className="col-span-3 space-y-1">
                         <CardInfo
                           title="less frequent year"
-                          value={getLessFrequentYear()!}
+                          value={getLessFrequentYear(data)}
                         />
                       </div>
                     </div>
