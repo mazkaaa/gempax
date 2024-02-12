@@ -1,5 +1,6 @@
 "use client";
 
+import { useApi } from "@/components/context/use-api";
 import { useFilter } from "@/components/context/use-filter";
 import React from "react";
 
