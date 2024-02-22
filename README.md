@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+##   GEMPAX: A Geospatial Earthquake Analysis Web Application
 
-First, run the development server:
+**Introduction**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+GEMPAX, is an acronym derived from the Indonesian word for "earthquake" (gempa), is a web application designed to empower users with insights into historical and recent seismic events around the world. Developed with the ambition to educate and inform, GEMPAX aims to:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-   **Raise awareness** about earthquake history and potential risks in local areas.
+-   **Facilitate visualization** of geospatial earthquake data and associated information.
+-   **Present earthquake impact data** in an easily digestible format through widgets.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This document serves as a technical overview of GEMPAX, highlighting key features and underlying technologies.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+**Features**
 
-## Learn More
+-   **Historical Earthquake Data:** Explore a comprehensive database of earthquake events dating back to 2150 B.C., sourced from the National Centers for Environmental Information (NCEI).
+-   **Interactive Map & Visualizations:** Leverage the power of Mapbox and Deck.gl to visualize earthquake locations, magnitudes, depths, and other relevant data on an interactive map. Filter and customize the visualization to focus on specific regions or timeframes.
+-   **Widget-Based Data Insights:** Access summaries of earthquake impacts, such as casualties, economic losses, and infrastructure damage, presented in user-friendly widgets.
 
-To learn more about Next.js, take a look at the following resources:
+**Technology Stack**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   **Front-End:** NextJS, Typescript, and Tailwind
+-   **Mapping Library:** Mapbox
+-   **Data Visualization Library:** Deck.gl
+-   **Data Source:** National Centers for Environmental Information (NCEI)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Future Development**
 
-## Deploy on Vercel
+The development of GEMPAX is an ongoing journey. Future plans include:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-   Integrating additional data sources to enrich the information presented.
+-   Implementing advanced filtering and analysis capabilities.
+-   Expanding the widget library to provide more comprehensive insights.
+-   Building a community around GEMPAX for knowledge sharing and collaboration.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Conclusion**
+
+GEMPAX offers a unique perspective on earthquake analysis, combining historical data with interactive visualizations and informative widgets. As development continues, GEMPAX strives to become a valuable resource for anyone seeking to understand and learn from past and present seismic events.
+
+**Website:**  [https://gempax.mazka.dev/](https://gempax.mazka.dev/)
+
+**Feedback:** We encourage you to explore GEMPAX and provide valuable feedback to help us shape its future. Join the community and be part of this seismic journey!
