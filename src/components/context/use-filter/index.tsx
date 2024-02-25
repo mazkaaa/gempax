@@ -6,11 +6,12 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useMemo,
   useState,
 } from "react";
 
 interface FilterInterface {
-  country: string[];
+  country?: string[];
   start_year?: number;
   end_year?: number;
 }
@@ -24,7 +25,6 @@ type ContextType = {
   }[];
   applyFilter: ({ country, start_year, end_year }: FilterInterface) => void;
   filter: FilterInterface;
-  isFilterApplied: (filter: FilterInterface) => boolean;
 };
 
 const context = createContext<ContextType>({
@@ -37,7 +37,6 @@ const context = createContext<ContextType>({
     start_year: undefined,
     end_year: undefined,
   },
-  isFilterApplied: () => false,
 });
 
 export const FilterProvider = ({ children }: any) => {
@@ -57,13 +56,6 @@ export const FilterProvider = ({ children }: any) => {
       end_year,
     });
   };
-  const isFilterApplied = () => {
-    return (
-      filter.country.length > 0 ||
-      filter.start_year !== undefined ||
-      filter.end_year !== undefined
-    );
-  };
 
   return (
     <context.Provider
@@ -73,7 +65,6 @@ export const FilterProvider = ({ children }: any) => {
         getCountries,
         applyFilter,
         filter,
-        isFilterApplied,
       }}
     >
       {children}

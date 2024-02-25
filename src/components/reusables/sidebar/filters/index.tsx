@@ -2,10 +2,11 @@
 
 import { useApi } from "@/components/context/use-api";
 import { useFilter } from "@/components/context/use-filter";
-import React from "react";
+import React, { useEffect } from "react";
 
 const Filters = () => {
-  const { getCountries: countries, applyFilter } = useFilter();
+  const { getCountries: countries, applyFilter, filter } = useFilter();
+  const { loading } = useApi();
 
   return (
     <div className="flex flex-col divide-y divide-gray-300">
@@ -40,7 +41,7 @@ const Filters = () => {
             <option value={""}>Select country to view data</option>
             {countries().map((country, index) => (
               <option key={index} value={country.id} className="capitalize">
-                {country.id.toLowerCase()}
+                {country.id}
               </option>
             ))}
           </select>
@@ -50,7 +51,14 @@ const Filters = () => {
           <p className="text-sm font-medium">Start year</p>
           <select
             className="select select-bordered select-sm w-full"
-            onChange={(e) => applyFilter({ country: [e.target.value] })}
+            onChange={(e) =>
+              applyFilter({
+                start_year: parseInt(e.target.value),
+              })
+            }
+            disabled={
+              (filter.country ? filter.country[0] === "" : false) || loading
+            }
           >
             <option value={""}>Select start year range</option>
             {Array.from({
@@ -67,7 +75,14 @@ const Filters = () => {
           <p className="text-sm font-medium">End year</p>
           <select
             className="select select-bordered select-sm w-full"
-            onChange={(e) => applyFilter({ country: [e.target.value] })}
+            onChange={(e) =>
+              applyFilter({
+                end_year: parseInt(e.target.value),
+              })
+            }
+            disabled={
+              (filter.country ? filter.country[0] === "" : false) || loading
+            }
           >
             <option value={""}>Select end year range</option>
             {Array.from({
