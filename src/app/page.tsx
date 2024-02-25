@@ -1,22 +1,18 @@
 "use client";
-import Image from "next/image";
 import DeckGL from "@deck.gl/react/typed";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Map from "react-map-gl";
 import { ScreenGridLayer } from "@deck.gl/aggregation-layers/typed";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { EarthquakeData } from "@/components/interfaces";
-import CardInfo from "@/components/reusables/card-info";
-import { api } from "@/components/constants";
-import countries from "@/components/countries.json";
+import { useFilter } from "@/components/context/use-filter";
+import { useApi } from "@/components/context/use-api";
 
 export default function Home() {
-  const [data, setData] = useState<EarthquakeData[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { data } = useApi();
+  const { filter } = useFilter();
 
-  const [country, setCountry] = useState("");
-
-  const [cellSize, setCellSize] = useState<number>(25);
+  const [cellSize, setCellSize] = useState<number>(18);
 
   const colorRange = [
     [255, 255, 178, 25],
@@ -30,7 +26,13 @@ export default function Home() {
   const layers = [
     new ScreenGridLayer<EarthquakeData>({
       id: "grid",
-      data: data,
+      data: data
+        .filter((item) =>
+          filter.start_year ? item.year >= filter.start_year : true,
+        )
+        .filter((item) =>
+          filter.end_year ? item.year <= filter.end_year : true,
+        ),
       opacity: 0.8,
       getPosition: (d) => [d.longitude, d.latitude],
       getWeight: (d) => d.year,
@@ -39,141 +41,6 @@ export default function Home() {
       aggregation: "SUM",
     }),
   ];
-
-  const fetchData = async () => {
-    setLoading(true);
-    const params = new URLSearchParams();
-    let page = 1;
-    params.append("country", country);
-    const res = await fetch(
-      api.url + api.earthquakes.url + "?" + params.toString(),
-    );
-    const result = await res.json();
-    const dataResult: EarthquakeData[] = result.items;
-    // setData(dataResult);
-
-    // loop through the pages and set the timeout to 3 second in promise
-    page++;
-
-    while (page <= result.totalPages) {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
-      const res = await fetch(
-        api.url +
-          api.earthquakes.url +
-          "?" +
-          params.toString() +
-          "&page=" +
-          page,
-      );
-      const result = await res.json();
-      dataResult.push(...result.items);
-      page++;
-    }
-    setData(dataResult);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    if (country !== "") {
-      fetchData();
-    }
-  }, [country]);
-
-  const getTotalHousesDestroyed = () => {
-    return data.reduce((a, b) => (a || 0) + (b.housesDestroyed || 0), 0);
-  };
-  const getTotalHousesDamaged = () => {
-    return data.reduce((a, b) => (a || 0) + (b.housesDamaged || 0), 0);
-  };
-  const getTotalDeaths = () => {
-    return data.reduce((a, b) => (a || 0) + (b.deaths || 0), 0);
-  };
-  const getTotalInjuries = () => {
-    return data.reduce((a, b) => (a || 0) + (b.injuries || 0), 0);
-  };
-  const getMostDestructiveYear = () => {
-    const yearTotals: { [key: number]: number } = data.reduce(
-      (
-        acc: {
-          [key: number]: number;
-        },
-        curr,
-      ) => {
-        const year = curr.year;
-        if (curr.housesDestroyedTotal !== undefined) {
-          acc[year] = (acc[year] || 0) + curr.housesDestroyedTotal;
-        }
-        return acc;
-      },
-      {},
-    );
-
-    // Find the year with the highest destroyed house value
-    const highestValue = Math.max(...Object.values(yearTotals));
-    const highestYear = Object.entries(yearTotals).find(
-      ([year, value]) => value === highestValue,
-    )?.[0];
-
-    return highestYear; // Ensure number type
-  };
-  const getLessDestructiveYear = () => {
-    const yearTotals: { [key: number]: number } = data.reduce(
-      (
-        acc: {
-          [key: number]: number;
-        },
-        curr,
-      ) => {
-        const year = curr.year;
-        if (curr.housesDestroyedTotal !== undefined) {
-          acc[year] = (acc[year] || 0) + curr.housesDestroyedTotal;
-        }
-        return acc;
-      },
-      {},
-    );
-
-    // Find the year with the highest destroyed house value
-    const highestValue = Math.min(...Object.values(yearTotals));
-    const highestYear = Object.entries(yearTotals).find(
-      ([year, value]) => value === highestValue,
-    )?.[0];
-
-    return highestYear;
-  };
-  const getMostFrequentYear = () => {
-    const years = data.map((d) => d.year);
-    const counts: {
-      [key: number]: number;
-    } = {};
-
-    years.forEach((x) => {
-      counts[x] = (counts[x] || 0) + 1;
-    });
-
-    const max = Math.max(...Object.values(counts));
-    const year = Object.keys(counts).find((key) => counts[key as any] === max);
-    return year;
-  };
-  const getLessFrequentYear = () => {
-    const years = data.map((d) => d.year);
-    const counts: {
-      [key: number]: number;
-    } = {};
-
-    years.forEach((x) => {
-      counts[x] = (counts[x] || 0) + 1;
-    });
-
-    const min = Math.min(...Object.values(counts));
-    const year = Object.keys(counts).find((key) => counts[key as any] === min);
-    return year;
-  };
-
-  const formatNumber = (n: number) => {
-    if (n < 1e3) return n;
-    if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
-  };
 
   return (
     <main className="relative h-full w-full">
@@ -184,9 +51,9 @@ export default function Home() {
       </div>
 
       <div className="hidden h-full w-full md:block">
-        <div className="absolute right-4 top-4 z-50 text-gray-700">
-          <div className="h-auto w-96 bg-white">
-            <section id="about" className="space-y-2 p-4 ">
+        <div className="absolute right-4 top-4 z-50 hidden text-gray-700">
+          <div className="h-auto w-full max-w-md divide-y divide-gray-300 bg-white">
+            <section id="about" className="space-y-2 p-6">
               <h1 className="text-lg font-semibold">Earthquake Events</h1>
               <div className="space-y-1">
                 <p className="text-sm">
@@ -204,112 +71,6 @@ export default function Home() {
                 </p>
               </div>
             </section>
-
-            <div className="w-full border-b"></div>
-
-            <section id="filter" className="space-y-4 p-4 ">
-              <div className="space-y-2">
-                {/* <h1 className="text-lg font-semibold">Filter</h1> */}
-                <div className="space-y-1">
-                  <p className="text-sm">Cell size</p>
-                  <input
-                    type="range"
-                    min={5}
-                    max="25"
-                    value={cellSize}
-                    onChange={(e) => setCellSize(parseInt(e.target.value))}
-                    className="range range-xs"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <p className="text-sm">Country</p>
-                  <select
-                    className="select select-bordered select-sm w-full"
-                    onChange={(e) => setCountry(e.target.value)}
-                  >
-                    <option value={""}>Select country to view data</option>
-                    {countries.map((country, index) => (
-                      <option key={index} value={country.id}>
-                        {country.id}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </section>
-
-            {country === "" ? null : (
-              <>
-                <div className="w-full border-b"></div>
-                <section id="data" className="space-y-4 p-4 uppercase">
-                  {!loading && data.length > 0 ? (
-                    <div className="grid grid-cols-6 gap-4">
-                      <div className="col-span-3">
-                        <CardInfo
-                          title="total houses destroyed"
-                          value={
-                            formatNumber(getTotalHousesDestroyed())?.toString()!
-                          }
-                        />
-                      </div>
-
-                      <div className="col-span-3 space-y-1">
-                        <CardInfo
-                          title="total houses damaged"
-                          value={
-                            formatNumber(getTotalHousesDamaged())?.toString()!
-                          }
-                        />
-                      </div>
-
-                      <div className="col-span-3 space-y-1">
-                        <CardInfo
-                          title="total deaths"
-                          value={formatNumber(getTotalDeaths())?.toString()!}
-                        />
-                      </div>
-
-                      <div className="col-span-3 space-y-1">
-                        <CardInfo
-                          title="total injuries"
-                          value={formatNumber(getTotalInjuries())?.toString()!}
-                        />
-                      </div>
-
-                      <div className="col-span-3 space-y-1">
-                        <CardInfo
-                          title="most destructive year"
-                          value={getMostDestructiveYear()!}
-                        />
-                      </div>
-
-                      <div className="col-span-3 space-y-1">
-                        <CardInfo
-                          title="less destructive year"
-                          value={getLessDestructiveYear()!}
-                        />
-                      </div>
-
-                      <div className="col-span-3 space-y-1">
-                        <CardInfo
-                          title="most frequent year"
-                          value={getMostFrequentYear()!}
-                        />
-                      </div>
-
-                      <div className="col-span-3 space-y-1">
-                        <CardInfo
-                          title="less frequent year"
-                          value={getLessFrequentYear()!}
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    "Loading..."
-                  )}
-                </section>
-              </>
-            )}
           </div>
         </div>
         <DeckGL
