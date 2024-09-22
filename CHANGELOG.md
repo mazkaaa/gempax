@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/mazkaaa/gempax/compare/v1.1.2...v1.2.0) (2024-02-25)
+
+
+### Features
+
+* revamped UI and separated the filter section and the widget ([da86e48](https://github.com/mazkaaa/gempax/commit/da86e48d4476465397c862a63c6149064e92e23c))
+
+
+### Performance Improvements
+
+* added some codes ([e988ceb](https://github.com/mazkaaa/gempax/commit/e988ceb591029ca65a75c90e98a355daca4243ef))
+* added some codes that still in development ([d4cd956](https://github.com/mazkaaa/gempax/commit/d4cd956c2ca26ee832dfed23750bd3980a4cd54c))
+
 ## [1.1.2](https://github.com/mazkaaa/gempax/compare/v1.1.1...v1.1.2) (2024-02-04)
 
 
