@@ -7,14 +7,15 @@ import { useState } from "react";
 import { EarthquakeData } from "@/components/interfaces";
 import { useFilter } from "@/components/context/use-filter";
 import { useApi } from "@/components/context/use-api";
+import type { Color } from "@deck.gl/core/typed";
 
 export default function Home() {
   const { data } = useApi();
   const { filter } = useFilter();
 
-  const [cellSize, setCellSize] = useState<number>(18);
+  const [cellSize] = useState<number>(18);
 
-  const colorRange = [
+  const colorRange: Color[] = [
     [255, 255, 178, 25],
     [254, 217, 118, 85],
     [254, 178, 76, 127],
@@ -37,7 +38,7 @@ export default function Home() {
       getPosition: (d) => [d.longitude, d.latitude],
       getWeight: (d) => d.year,
       cellSizePixels: cellSize,
-      colorRange: colorRange as any,
+      colorRange: colorRange,
       aggregation: "SUM",
     }),
   ];
