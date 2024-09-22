@@ -28,14 +28,14 @@ export default function RootLayout({
   return (
     <html data-theme="corporate" lang="en">
       <body className={inter.className + " h-screen w-screen"}>
-        <main className="flex h-full w-full">
+        <main className="grid h-full grid-cols-12">
           <ApiProvider>
             <FilterProvider>
-              <section className="w-full max-w-xs bg-slate-50">
+              <section className="col-span-2 bg-slate-50">
                 <Filters />
               </section>
-              <section className="h-full w-full">{children}</section>
-              <section className="w-full max-w-xs bg-slate-50">
+              <section className="col-span-8">{children}</section>
+              <section className="col-span-2 bg-slate-50">
                 <Widgets />
               </section>
             </FilterProvider>
