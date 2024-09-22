@@ -67,7 +67,7 @@ const Widgets = () => {
 
             <div className="col-span-3">
               <GeneralWidget
-                label="destructive year"
+                label="most destructive year"
                 value={getMostDestructiveYear(data)}
                 isLoading={loading}
               />
