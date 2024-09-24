@@ -6,7 +6,6 @@ import {
   SetStateAction,
   createContext,
   useContext,
-  useMemo,
   useState,
 } from "react";
 
@@ -39,7 +38,7 @@ const context = createContext<ContextType>({
   },
 });
 
-export const FilterProvider = ({ children }: any) => {
+export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState<FilterInterface>({
     country: [""],

@@ -1,6 +1,5 @@
 "use client";
 import { api } from "@/components/constants";
-import countries from "@/components/countries.json";
 import { EarthquakeData } from "@/components/interfaces";
 
 import {
@@ -26,7 +25,7 @@ const context = createContext<ContextType>({
   data: [],
 });
 
-export const ApiProvider = ({ children }: any) => {
+export const ApiProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<EarthquakeData[]>([]);
   //   setLoading(true);
