@@ -1,4 +1,4 @@
-export interface EarthquakeData extends Item {}
+export type EarthquakeData = Item;
 
 export interface Item {
   id: number;
