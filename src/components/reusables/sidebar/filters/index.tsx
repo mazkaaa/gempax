@@ -2,7 +2,7 @@
 
 import { useApi } from "@/components/context/use-api";
 import { useFilter } from "@/components/context/use-filter";
-import React, { useEffect } from "react";
+import React from "react";
 
 const Filters = () => {
   const { getCountries: countries, applyFilter, filter } = useFilter();
