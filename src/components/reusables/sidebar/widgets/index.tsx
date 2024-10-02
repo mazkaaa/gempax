@@ -3,18 +3,8 @@
 import { useApi } from "@/components/context/use-api";
 import { useFilter } from "@/components/context/use-filter";
 import React, { useEffect } from "react";
-import {
-  formatDigitNumber,
-  getLessDestructiveYear,
-  getLessFrequentYear,
-  getMostDestructiveYear,
-  getMostFrequentYear,
-  getTotalDeaths,
-  getTotalHousesDamaged,
-  getTotalHousesDestroyed,
-  getTotalInjuries,
-} from "@/components/utils";
 import GeneralWidget from "../../widget/general-widget";
+import { GENERAL_INFORMATION_DATA } from "@/components/data";
 
 const Widgets = () => {
   const { loading, fetchData, data } = useApi();
@@ -33,69 +23,15 @@ const Widgets = () => {
         <section id="general-widget" className="space-y-4 p-6">
           <h1 className="text-lg font-semibold">General Information</h1>
           <div className="grid grid-cols-6 gap-4">
-            <div className="col-span-3">
-              <GeneralWidget
-                label="houses destroyed"
-                value={formatDigitNumber(getTotalHousesDestroyed(data))}
-                isLoading={loading}
-              />
-            </div>
-
-            <div className="col-span-3">
-              <GeneralWidget
-                label="houses damaged"
-                value={formatDigitNumber(getTotalHousesDamaged(data))}
-                isLoading={loading}
-              />
-            </div>
-
-            <div className="col-span-3">
-              <GeneralWidget
-                label="deaths"
-                value={formatDigitNumber(getTotalDeaths(data))}
-                isLoading={loading}
-              />
-            </div>
-
-            <div className="col-span-3">
-              <GeneralWidget
-                label="injuries"
-                value={formatDigitNumber(getTotalInjuries(data))}
-                isLoading={loading}
-              />
-            </div>
-
-            <div className="col-span-3">
-              <GeneralWidget
-                label="most destructive year"
-                value={getMostDestructiveYear(data)}
-                isLoading={loading}
-              />
-            </div>
-
-            <div className="col-span-3">
-              <GeneralWidget
-                label="less destructive year"
-                value={getLessDestructiveYear(data)}
-                isLoading={loading}
-              />
-            </div>
-
-            <div className="col-span-3">
-              <GeneralWidget
-                label="most frequent year"
-                value={getMostFrequentYear(data)}
-                isLoading={loading}
-              />
-            </div>
-
-            <div className="col-span-3">
-              <GeneralWidget
-                label="less frequent year"
-                value={getLessFrequentYear(data)}
-                isLoading={loading}
-              />
-            </div>
+            {GENERAL_INFORMATION_DATA.map((item, index) => (
+              <div className="col-span-3" key={index}>
+                <GeneralWidget
+                  label={item.label}
+                  value={item.formula(data, item.data_key)}
+                  isLoading={loading}
+                />
+              </div>
+            ))}
           </div>
         </section>
       </div>

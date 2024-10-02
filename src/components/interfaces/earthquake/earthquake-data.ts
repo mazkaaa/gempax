@@ -1,4 +1,5 @@
 export type EarthquakeData = Item;
+export type EARTHQUAKE_DATA_KEYS = keyof EarthquakeData;
 
 export interface Item {
   id: number;
