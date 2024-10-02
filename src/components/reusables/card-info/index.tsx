@@ -1,7 +1,7 @@
 import React from "react";
 type CardInfoProps = {
   title: string;
-  value: string | number | null | any[];
+  value: string | number | null;
   isLoading?: boolean;
 };
 const CardInfo = (props: CardInfoProps) => {
